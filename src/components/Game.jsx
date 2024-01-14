@@ -1,43 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import times from "lodash/times";
+import { MAX_POS } from "../constant";
+import { getInitilaTileList } from "../util/tile";
+import useMoveTile from "../hook/useMoveTile";
+import Tile from "./Tile";
 
-const Game = () => {
+const Game = ({setScore}) => {
+  const [tileList, setTileList] = useState(getInitilaTileList);
+  // up, down, left, right
+  useMoveTile({ tileList, setTileList, setScore });
   return (
     <>
       <div className="game-container">
         <div className="grid-container">
-          <div className="grid-row">
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-          </div>
-          <div className="grid-row">
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-          </div>
-          <div className="grid-row">
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-          </div>
-          <div className="grid-row">
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-            <div className="grid-cell"></div>
-          </div>
+          {times(MAX_POS, (idx) => (
+            <div key={idx} className="grid-row">
+              {times(MAX_POS, (idx2) => (
+                <div key={idx2} className="grid-cell"></div>
+              ))}
+            </div>
+          ))}
         </div>
 
         <div className="tile-container">
-          <div className="tile tile-4 tile-position-1-2 tile-new">
-            <div className="tile-inner">4</div>
-          </div>
-          <div className="tile tile-2 tile-position-1-3 tile-new">
-            <div className="tile-inner">2</div>
-          </div>
+          {tileList.map((item) => (
+            <Tile key={item.id} {...item} />
+          ))}
         </div>
       </div>
     </>

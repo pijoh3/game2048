@@ -1,3 +1,5 @@
+import React from "react";
+
 const AboveGame = () => {
   return (
     <div className="above-game">

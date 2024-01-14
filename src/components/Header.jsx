@@ -1,13 +1,15 @@
-const Header = () => {
+import React from "react";
+
+const Header = ({ score, bestScore }) => {
   return (
     <>
       <header className="heading">
         <h1 className="title">2048</h1>
         <div className="scores-container">
           <div className="score-container" style={{ marginRight: 5 }}>
-            0
+            {score}
           </div>
-          <div className="best-container">2480</div>
+          <div className="best-container">{bestScore}</div>
         </div>
       </header>
     </>
